@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  {% include 'cdnlines.html' %}
+</head>
+<style>
+    input{
+        margin-top: 10px;
+    }
+
+</style>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+        <h3 class="text-center">Please Enter Data...</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <!--<label>Enter First Name:</label> -->
+                        <input type="text" name="fname" class="form-control" placeholder="First Name">
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <label>Enter Last Name:</label>-->
+                        <input type="text" name="lname" class="form-control" placeholder="Last Name">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <label>Enter Contact Number:</label> -->
+                        <input type="number" name="mobile" class="form-control"placeholder="Contact Number">
+                    </div>
+                </div>
+
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- <label>Enter Telugu Marks:</label> -->
+                        <input type="number" name="telugu" class="form-control" placeholder="Telugu Marks">
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <label>Enter Hindi Marks:</label> -->
+                        <input type="number" name="hindi" class="form-control" placeholder="Hindi Marks">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- <label>Enter English Marks:</label>-->
+                        <input type="number" name="english" class="form-control" placeholder="English Marks">
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <label>Enter Maths Marks:</label> -->
+                        <input type="number"name="maths" class="form-control" placeholder="Maths Marks">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- <label>Enter Science Marks:</label> -->
+                        <input type="number"name="science" class="form-control" placeholder="Science Marks">
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <label>Enter Social Marks:</label> -->
+                        <input type="number"name="social" class="form-control" placeholder="Social Marks">
+                    </div>
+                </div>
+                <center>
+                <input type="submit" value="Insert" class="btn btn-success">
+                <input type="reset" name="Clear" class="btn btn-danger">
+                </center>
+            </form>
+        </div>
+        <div class="col-md-9">
+        <h2 class="text-center">Students Data Displaying</h2>
+            {% if students %}
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Contact</th>
+                        <th>Telugu</th>
+                        <th>Hindi</th>
+                        <th>English</th>
+                        <th>Maths</th>
+                        <th>Science</th>
+                        <th>Social</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.first_name }}</td>
+                        <td>{{ student.last_name }}</td>
+                        <td>{{ student.mobile_number }}</td>
+                        <td>{{ student.telugu }}</td>
+                        <td>{{ student.hindi }}</td>
+                        <td>{{ student.english }}</td>
+                        <td>{{ student.maths }}</td>
+                        <td>{{ student.science }}</td>
+                        <td>{{ student.social }}</td>
+                        <td><a class="btn btn-success" href="{% url 'update' student.id %}">Update</a>
+                            <a class="btn btn-danger" href="{% url 'delete' student.id %}">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h3>No Data Available</h3>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
